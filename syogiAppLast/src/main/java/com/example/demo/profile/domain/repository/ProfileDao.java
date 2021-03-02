@@ -1,5 +1,6 @@
 package com.example.demo.profile.domain.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
@@ -16,4 +17,10 @@ public interface ProfileDao{
 
 	//profileのアップデート
 	public int updataOne(Profile profile) throws DataAccessException;
+
+	//友達登録処理
+	public int followOne(int followId,int followerId) throws DataAccessException;
+
+	//友達情報取得
+	public List<Map<String, Object>> selectMany(int userId) throws DataAccessException;
 }

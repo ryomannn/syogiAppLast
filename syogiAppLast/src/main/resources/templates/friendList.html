@@ -14,8 +14,9 @@
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/simple-sidebar.css" rel="stylesheet">
-  <link href="css/table.css" rel="stylesheet" >
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link href="css/simple-sidebar.css" rel="stylesheet">
+   <link href="css/table.css" rel="stylesheet" >
 
 </head>
 
@@ -28,10 +29,10 @@
       <div class="sidebar-heading">将棋アプリ </div>
       <div class="list-group list-group-flush">
         <a th:href="@{/profile}" class="list-group-item list-group-item-action bg-light">プロフィール</a>
-        <a th:href="@{/findUser}" class="list-group-item list-group-item-action bg-light">友達一覧</a>
+        <a th:href="@{/findUserList}" class="list-group-item list-group-item-action bg-light">友達一覧</a>
         <a th:href="@{/findUser}" class="list-group-item list-group-item-action bg-light">ユーザー検索</a>
         <a th:href="@{/postInput}" class="list-group-item list-group-item-action bg-light">新規投稿</a>
-        <a th:href="@{/postInput}" class="list-group-item list-group-item-action bg-light">投稿履歴</a>
+        <a th:href="@{/post}" class="list-group-item list-group-item-action bg-light">投稿履歴</a>
         <a th:href="@{/findBattleType}" class="list-group-item list-group-item-action bg-light">戦型選択</a>
       </div>
     </div>
@@ -58,11 +59,21 @@
           </ul>
         </div>
       </nav>
-      <div>
+      <div class="container-fluid">
       	<h1>フレンドリスト</h1>
+		<table  class="kaisha">
+			<tr>
+				<th>ユーザーID</th>
+				<th>ユーザー名</th>
+				<th>プロフィール</th>
+			</tr>
+			<tr th:each = "user : ${userLists}" >
+				<td th:text="${user.userId}"></td>
+				<td th:text="${user.userName}"></td>
+				<td><a class="btn btn-primary" th:href="@{/friendProfile/{id}(id=${user.userId})}">プロフィール</a></td>
+			</tr>
 
-
-
+		</table>
       </div>
     </div>
     <!-- /#page-content-wrapper -->

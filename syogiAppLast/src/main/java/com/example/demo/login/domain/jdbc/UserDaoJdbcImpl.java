@@ -22,19 +22,34 @@ public class UserDaoJdbcImpl implements UserDao{
 
 		String insertSQL = "insert into syogi.users(name, address, password) values(?,?,?)";
 
+		System.out.println(user + "UserDaoJdbcImpl ");
+
 		int insertNumber = jdbc.update(insertSQL, user.getUserName(), user.getUserAddress(),user.getPassword());
+
+		System.out.println( "UserDaoJdbcImpl終わり ");
 
 		return insertNumber;
 
 	}
 
-	//user情報の取得
+	//user情報をアドレスで取得
 	@Override
-	public Map<String, Object> selectOne(User user) {
+	public Map<String, Object> selectOne(String address) {
 
 		String selectSQL = "select * from syogi.users where address = ?";
 
-		Map<String, Object> map = jdbc.queryForMap(selectSQL, user.getUserAddress());
+		Map<String, Object> map = jdbc.queryForMap(selectSQL, address);
+
+		return map;
+	}
+
+	//user名をIDで取得
+	@Override
+	public Map<String, Object> selectOne(int userId){
+
+		String selectManySQL = "select * from syogi.users where id = ? ";
+
+		Map<String, Object> map = jdbc.queryForMap(selectManySQL,userId);
 
 		return map;
 	}

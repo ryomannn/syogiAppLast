@@ -11,6 +11,10 @@ public interface UserDao{
 	//user情報を登録
 	public int insertOne(User user) throws DataAccessException;
 
-	//user情報の取得
-	public Map<String, Object> selectOne(User user) throws DataAccessException;
+	//user情報をアドレスで取得
+	public Map<String, Object> selectOne(String address) throws DataAccessException;
+
+	//user情報をIDで取得
+	public Map<String, Object> selectOne(int userId) throws DataAccessException;
+
 }

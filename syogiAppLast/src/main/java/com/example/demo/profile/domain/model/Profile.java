@@ -1,38 +1,17 @@
 package com.example.demo.profile.domain.model;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
+import java.io.Serializable;
 
 import lombok.Data;
 
 @Data
-public class Profile{
-	@NotNull
-	@Length(max=255)
-	int user_id;
+public class Profile implements Serializable{
 
-	@NotNull
-	@Length(max=1)
-	int gender;
-
-	@NotBlank
-	@Length(max=255)
-	String hobby;
-	@NotBlank
-	@Length(max=255)
-	String grade;
-	@NotBlank
-	@Length(max=255)
-	int history;
-	@NotBlank
-	@Length(max=255)
-	String fav_battleType;
-	@NotBlank
-	@Length(max=255)
-	String comment;
-
-
-
+	private int user_id;
+	private String gender;
+	private String hobby;
+	private String grade;
+	private String history;
+	private String fav_battleType;
+	private String comment;
 }

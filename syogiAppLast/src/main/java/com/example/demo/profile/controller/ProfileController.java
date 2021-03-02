@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.controller.UserController;
+import com.example.demo.login.domain.service.UserService;
 import com.example.demo.profile.domain.model.Profile;
 import com.example.demo.profile.domain.service.ProfileService;
 
@@ -17,14 +19,20 @@ public class ProfileController{
 	@Autowired
 	ProfileService profileService;
 
+	@Autowired
+	UserService userService;
+
+	@Autowired
+	UserController userController;
+
 	//プロフィール画面の表示
 	@GetMapping("/profile")
 	public String getProfile(Model model) {
 
 		Profile result = new Profile();
 
-		//userIDをsesseionで管理して取ってくる
-		int userId =1;
+
+		int userId = userController.GetUserId();
 
 		//profile情報取得
 		result = profileService.selectOne(userId);
@@ -34,22 +42,25 @@ public class ProfileController{
 		return "/profile";
 	}
 
-	//プロフィール入力画面の表示
-	@GetMapping("/profileInput")
-	public String getProfileInput(Model model) {
+	//プロフィール更新画面の表示
+	@GetMapping("/profileUpdate")
+	public String getProfileInput(@ModelAttribute Profile profile,Model model) {
 
-		return "/profileInput";
+		return "/profileUpdate";
 	}
 
 	//入力されたプロフィール情報をDBに登録
-	@PostMapping("/profileInput")
+	@PostMapping("/profileUpdate")
 	public String postProfileInput(@ModelAttribute Profile profile, Model model) {
 
-		System.out.println("profile情報: " + profile);
+		int userId = userController.GetUserId();
+
+		profile.setUser_id(userId);
 
 		profileService.updateOne(profile);
 
 		return getProfile(model);
 
 	}
+
 }
